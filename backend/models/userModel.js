@@ -32,15 +32,16 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
   return  await bcrypt.compare(enteredPassword,this.password);
 };
 
-// // Encrypt password using bcrypt
-// userSchema.pre('save', async function (next) {
-//   if (!this.isModified('password')) {
-//     next();
-//   }
+// Encrypt password using bcrypt
+//we use pre because it allows us to do something before save it in the database
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    next();
+  }
 
-//   const salt = await bcrypt.genSalt(10);
-//   this.password = await bcrypt.hash(this.password, salt);
-// });
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
 
 const User = mongoose.model('User', userSchema);
 
