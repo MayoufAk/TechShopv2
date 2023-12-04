@@ -22,3 +22,4 @@ export const productsApiSlice=apiSlice.injectEndpoints({
 export const {useGetProductsQuery,useGetProductDetailsQuery}=productsApiSlice
 
 //there is a certain convention for this prefix use and suffix query
+
